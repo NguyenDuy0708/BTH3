@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = \App\Models\Task::all();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -34,7 +30,7 @@ class TaskController extends Controller
             'description' => 'required',
         ]);
 
-        Task::create($request->all());
+        \App\Models\Task::create($request->all());
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
@@ -42,7 +38,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(\App\Models\Task $task)
     {
         return view('tasks.show', compact('task'));
     }
@@ -50,7 +46,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(\App\Models\Task $task)
     {
         return view('tasks.edit', compact('task'));
     }
@@ -58,7 +54,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, \App\Models\Task $task)
     {
         $request->validate([
             'title' => 'required',
@@ -73,10 +69,11 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(\App\Models\Task $task)
     {
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
     }
+
 }
