@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TaskController;
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.App');
 });
-Route :: get('/tasks', [App\Http\Controllers\TaskController::class]);
+Route ::resource('tasks', TaskController::class);
