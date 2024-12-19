@@ -22,6 +22,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'long_description'=>'required',
         ]);
         \App\Models\Task::create($request->except('_token'));
 
@@ -43,6 +44,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'long_description'=>'required',
         ]);
 
         $task->update($request->except('_token'));
